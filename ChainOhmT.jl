@@ -12,11 +12,11 @@ include("mcdis2.jl")
 global mc, mp, iq, idelta, irout, AB, a, s, beta
 
 ## Spectral density parameters
-a = 0.03
+a = 0.1
 wc = 1
-beta = 2
+beta = 2.
 xc = wc
-s = 1
+s = parse(Float64, ARGS[1])
 
 ## discretisation parameters
 mc=4 # the number of component intervals
@@ -25,9 +25,9 @@ iq=1 # a parameter to be set equal to 1, if the user provides his or her own qua
 idelta=2 # a parameter whose default value is 1, but is preferably set equal to 2, if iq=1 and the user provides Gauss-type quadrature routines
 irout=2 # choice between the Stieltjes (irout = 1) and the Lanczos procedure (irout != 1)
 AB =[[-Inf -xc];[-xc 0];[0 xc];[xc Inf]] # component intervals
-N=1000 #Number of bath modes
-Mmax=5000
-eps0=1e7*eps(Float64)
+N=300 #Number of bath modes
+Mmax=5000 # max number of iterations
+eps0=1e11*eps(Float64)
 
 jacerg = zeros(N,2)
 
@@ -52,13 +52,14 @@ sstr=string(s)
 bstr=string(beta)
 
 # the "path" to the data inside of the h5 file is beta -> alpha -> s -> data (e, t or c)
+# beta is the inverse temperature, alpha (a) is the coupling strength
 
 # Write onsite energies
-h5write("./ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/e"), jacerg[1:N,1])
+h5write("/home/berkane/Documents/stage/Julia/ohmicity_finite_temp/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/e"), jacerg[1:N,1])
 # Write hopping energies
-h5write("./ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/t"), jacerg[1:N-1,2])
+h5write("/home/berkane/Documents/stage/Julia/ohmicity_finite_temp/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/t"), jacerg[1:N-1,2])
 # Write coupling coefficient
-h5write("./ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/c"), jacerg[N,2])
+h5write("/home/berkane/Documents/stage/Julia/ohmicity_finite_temp/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/c"), jacerg[N,2])
 
 
 end
