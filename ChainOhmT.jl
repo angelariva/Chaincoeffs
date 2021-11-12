@@ -12,7 +12,7 @@ include("mcdis2.jl")
 global mc, mp, iq, idelta, irout, AB, a, s, beta
 
 ## Spectral density parameters
-a = 0.1
+a = 0.05 # !!! this value is twice the spinboson.jl value
 wc = 1
 beta = 2.
 xc = wc
