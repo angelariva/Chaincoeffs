@@ -14,7 +14,7 @@ global mc, mp, iq, idelta, irout, AB, a, s, beta
 ## Spectral density parameters
 a = 0.025 # !!! this value could be twice the MPSDynamics value: a_chain = 2*a_MPS
 wc = 1
-beta = 2.
+beta = parse(Float64, ARGS[2])
 xc = wc
 s = parse(Float64, ARGS[1])
 
@@ -55,11 +55,11 @@ bstr=string(beta)
 # beta is the inverse temperature, alpha (a) is the coupling strength
 
 # Write onsite energies
-h5write("/home/berkane/Documents/stage/Julia/ohmicity_finite_temp/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/e"), jacerg[1:N,1])
+h5write("/home/berkane/Documents/stage/Chaincoeffs/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/e"), jacerg[1:N,1])
 # Write hopping energies
-h5write("/home/berkane/Documents/stage/Julia/ohmicity_finite_temp/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/t"), jacerg[1:N-1,2])
+h5write("/home/berkane/Documents/stage/Chaincoeffs/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/t"), jacerg[1:N-1,2])
 # Write coupling coefficient
-h5write("/home/berkane/Documents/stage/Julia/ohmicity_finite_temp/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/c"), jacerg[N,2])
+h5write("/home/berkane/Documents/stage/Chaincoeffs/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/c"), jacerg[N,2])
 
 
 end
