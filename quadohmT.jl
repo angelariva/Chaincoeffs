@@ -67,7 +67,7 @@ function wf(x,i)
     elseif i==2
         y = -pi*a*abs.(x).^s .* (coth.((beta/2).*x) .+ 1) #.* exp(-abs(x)/wc)
     elseif i==3
-        y = pi*a*abs.(x) .* (coth.((beta/2).*x) .+ 1) #.* exp(-abs(x)/wc)
+        y = pi*a*abs.(x).^s .* (coth.((beta/2).*x) .+ 1) #.* exp(-abs(x)/wc)
     elseif i==4
         y = 0
     end
