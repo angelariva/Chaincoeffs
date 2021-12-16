@@ -12,7 +12,7 @@ include("mcdis2.jl")
 global mc, mp, iq, idelta, irout, AB, a, s, beta
 
 ## Spectral density parameters
-a = 0.0025 # !!! this value could be twice the MPSDynamics value: a_chain = 2*a_MPS
+a = 0.0125 # !!! this value could be twice the MPSDynamics value: a_chain = 2*a_MPS
 wc = 1
 beta = parse(Float64, ARGS[2])
 xc = wc
