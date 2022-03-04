@@ -12,11 +12,11 @@ include("mcdis2.jl")
 global mc, mp, iq, idelta, irout, AB, a, s, beta
 
 ## Spectral density parameters
-#a = 0.025
+a = 0.025 
 wc = 1
 beta = parse(Float64, ARGS[2])
 xc = wc
-chain = parse(Float64, ARGS[1])
+s = parse(Float64, ARGS[1])
 
 ## discretisation parameters
 mc=4 # the number of component intervals
@@ -47,19 +47,19 @@ for i = 1:mc
 end
 jacerg[N,2] = wc.*sqrt(eta/pi) #coupling coeficient
 
-#astr=string(a)
-#sstr=string(s)
+astr=string(a)
+sstr=string(s)
 bstr=string(beta)
 
 # the "path" to the data inside of the h5 file is beta -> alpha -> s -> data (e, t or c)
 # beta is the inverse temperature, alpha (a) is the coupling strength
 
 # Write onsite energies
-h5write("/home/berkane/Documents/stage/Chaincoeffs/fermionic.h5", string("/",bstr,"/", string(chain),"/e"), jacerg[1:N,1])
+h5write("/home/berkane/Documents/stage/Chaincoeffs/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/e"), jacerg[1:N,1])
 # Write hopping energies
-h5write("/home/berkane/Documents/stage/Chaincoeffs/fermionic.h5", string("/",bstr,"/", string(chain),"/t"), jacerg[1:N-1,2])
+h5write("/home/berkane/Documents/stage/Chaincoeffs/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/t"), jacerg[1:N-1,2])
 # Write coupling coefficient
-h5write("/home/berkane/Documents/stage/Chaincoeffs/fermionic.h5", string("/",bstr,"/", string(chain),"/c"), jacerg[N,2])
+h5write("/home/berkane/Documents/stage/Chaincoeffs/ohmic_hard_beta.h5", string("/",bstr,"/",astr,"/",sstr,"/c"), jacerg[N,2])
 
 
 end

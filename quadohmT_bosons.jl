@@ -61,24 +61,12 @@ function ltr(t,i)
     return s
 end
 
-function Vk(x)
-    return sqrt(1-x^2)
-end
-
-function ϵ(x)
-    return 1.
-end
-
-# FERMIONIC
 function wf(x,i)
     if i==1
         y = 0
-    elseif i==2 || i==3
-        if chain==1
-            y = Vk.(x) .* sqrt.(1. ./(exp.(-beta .* ϵ.(x)) .+ 1))
-        elseif chain==2
-            y = Vk.(x) .* sqrt.(1. ./(exp.(beta .* ϵ.(x)) .+ 1))
-        end    elseif i==3
+    elseif i==2
+        y = -pi*a*abs.(x).^s .* (coth.((beta/2).*x) .+ 1) #.* exp(-abs(x)/wc)
+    elseif i==3
         y = pi*a*abs.(x).^s .* (coth.((beta/2).*x) .+ 1) #.* exp(-abs(x)/wc)
     elseif i==4
         y = 0
