@@ -78,9 +78,7 @@ function wf(x,i)
             y = Vk.(x) .* sqrt.(1. ./(exp.(-beta .* ϵ.(x)) .+ 1))
         elseif chain==2
             y = Vk.(x) .* sqrt.(1. ./(exp.(beta .* ϵ.(x)) .+ 1))
-        end    elseif i==3
-        y = pi*a*abs.(x).^s .* (coth.((beta/2).*x) .+ 1) #.* exp(-abs(x)/wc)
-    elseif i==4
+        elseif i==4
         y = 0
     end
     return y
