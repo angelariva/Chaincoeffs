@@ -25,7 +25,7 @@ iq=1 # a parameter to be set equal to 1, if the user provides his or her own qua
 idelta=2 # a parameter whose default value is 1, but is preferably set equal to 2, if iq=1 and the user provides Gauss-type quadrature routines
 irout=2 # choice between the Stieltjes (irout = 1) and the Lanczos procedure (irout != 1)
 AB =[[-Inf -xc];[-xc 0];[0 xc];[xc Inf]] # component intervals
-N=700 #Number of bath modes
+N=20 #Number of bath modes
 Mmax=5000 # max number of iterations
 eps0=1e11*eps(Float64)
 

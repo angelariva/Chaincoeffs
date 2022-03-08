@@ -66,7 +66,7 @@ function Vk(x)
 end
 
 function ϵ(x)
-    return 1.
+    return x
 end
 
 # FERMIONIC
@@ -78,7 +78,8 @@ function wf(x,i)
             y = Vk.(x) .* sqrt.(1. ./(exp.(-beta .* ϵ.(x)) .+ 1))
         elseif chain==2
             y = Vk.(x) .* sqrt.(1. ./(exp.(beta .* ϵ.(x)) .+ 1))
-        elseif i==4
+        end
+    elseif i==4
         y = 0
     end
     return y
