@@ -14,9 +14,9 @@ global mc, mp, iq, idelta, irout, AB, a, s, beta
 ## Spectral density parameters
 #a = 0.025
 wc = 1
-beta = parse(Float64, ARGS[2])
+beta = parse(Float64, ARGS[2]) # inverse temperature
 xc = wc
-chain = parse(Float64, ARGS[1])
+chain = parse(Float64, ARGS[1]) # index of the chain to be generated (1 empty, 2 filled)
 
 ## discretisation parameters
 mc=4 # the number of component intervals
@@ -25,7 +25,7 @@ iq=1 # a parameter to be set equal to 1, if the user provides his or her own qua
 idelta=2 # a parameter whose default value is 1, but is preferably set equal to 2, if iq=1 and the user provides Gauss-type quadrature routines
 irout=2 # choice between the Stieltjes (irout = 1) and the Lanczos procedure (irout != 1)
 AB =[[-Inf -xc];[-xc 0];[0 xc];[xc Inf]] # component intervals
-N=4 #Number of bath modes
+N=20 #Number of bath modes
 Mmax=5000 # max number of iterations
 eps0=1e11*eps(Float64)
 
@@ -51,8 +51,10 @@ jacerg[N,2] = wc.*sqrt(eta/pi) #coupling coeficient
 #sstr=string(s)
 bstr=string(beta)
 
-# the "path" to the data inside of the h5 file is beta -> alpha -> s -> data (e, t or c)
-# beta is the inverse temperature, alpha (a) is the coupling strength
+# the "path" to the data inside of the h5 file is beta -> chain -> data (e, t or c)
+# beta is the inverse temperature, chain is the chain, 1 or 2
+# chain 1 is coupled through the cosine (empty states)
+# chain 2 is coupled through the sine (filled states)
 
 # Write onsite energies
 h5write("/home/berkane/Documents/stage/Chaincoeffs/fermionic.h5", string("/",bstr,"/", string(chain),"/e"), jacerg[1:N,1])
