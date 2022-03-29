@@ -75,9 +75,9 @@ function wf(x,i)
         y = 0
     elseif i==2 || i==3
         if chain==1
-            y = Vk.(x) .* sqrt.(1. ./(exp.(-beta .* ϵ.(x)) .+ 1))
+            y = (Vk.(x) .* sqrt.(1. ./(exp.(-beta .* ϵ.(x)) .+ 1))).^2
         elseif chain==2
-            y = Vk.(x) .* sqrt.(1. ./(exp.(beta .* ϵ.(x)) .+ 1))
+            y = (Vk.(x) .* sqrt.(1. ./(exp.(beta .* ϵ.(x)) .+ 1))).^2
         end
     elseif i==4
         y = 0
